@@ -5,6 +5,9 @@ using DesafioPOO.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure Kestrel to listen on port 80
+builder.WebHost.UseUrls("http://*:80");
+
 // PostgreSQL connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CorretoraContext>(options =>
