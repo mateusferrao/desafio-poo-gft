@@ -27,6 +27,11 @@ public class ImovelService
         return await _imovelRepository.GetAllApartamentosAsync();
     }
 
+    public async Task<List<Imovel>> BuscarImoveisAlugadosAsync()
+    {
+        return await _imovelRepository.GetImoveisAlugadosAsync();
+    }
+
     public async Task<Imovel?> BuscarImovelPorIdAsync(int id)
     {
         return await _imovelRepository.GetByIdAsync(id);

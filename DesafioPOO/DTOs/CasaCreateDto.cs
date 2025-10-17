@@ -13,9 +13,9 @@ public class CasaCreateDto
     [Required(ErrorMessage = "O ID do proprietário é obrigatório")]
     public int ProprietarioId { get; set; }
 
-    [Required(ErrorMessage = "O tamanho é obrigatório")]
-    [Range(0.1, double.MaxValue, ErrorMessage = "O tamanho deve ser maior que zero")]
-    public double Tamanho { get; set; }
+    [Required(ErrorMessage = "O valor é obrigatório")]
+    [Range(0.1, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
+    public decimal Valor { get; set; }
 
     [Required(ErrorMessage = "O número de quartos é obrigatório")]
     [Range(1, int.MaxValue, ErrorMessage = "O número de quartos deve ser maior que zero")]

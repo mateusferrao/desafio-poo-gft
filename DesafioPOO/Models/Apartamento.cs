@@ -2,16 +2,16 @@ namespace DesafioPOO.Models;
 
 public class Apartamento : Imovel
 {
-    private static readonly double PORCENTAGEM_DE_ALUGUEL = 0.007;
+    private static readonly decimal PORCENTAGEM_DE_ALUGUEL = 0.007m;
     
     public int Andar { get; private set; }
     public string NumeroApartamento { get; private set; }
 
     public Apartamento() { }
 
-    public Apartamento(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho, 
+    public Apartamento(Endereco endereco, bool alugado, Proprietario proprietario, decimal valor, 
                        int andar, string numeroApartamento) 
-        : base(endereco, alugado, proprietario, tamanho)
+        : base(endereco, alugado, proprietario, valor)
     {
         Andar = andar;
         NumeroApartamento = numeroApartamento;
@@ -22,9 +22,20 @@ public class Apartamento : Imovel
         return Alugado ? "O apartamento está alugado" : "O apartamento está disponível";
     }
 
-    public override double CalcularAluguel()
+    public override decimal CalcularAluguel(int prazoAnos)
     {
-        return Tamanho * PORCENTAGEM_DE_ALUGUEL;
+        return Valor * PORCENTAGEM_DE_ALUGUEL * (1 - CalcularDescontoAluguel(prazoAnos));
+    }
+
+    public override decimal CalcularDescontoAluguel(int prazoAnos)
+    {
+        decimal percentualDesconto = base.CalcularDescontoAluguel(prazoAnos);
+        
+        if (Andar <= 2)
+        {
+            percentualDesconto += 0.02m;
+        }
+        return percentualDesconto;
     }
 
     public void SetAndar(int andar) => Andar = andar;

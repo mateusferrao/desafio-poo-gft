@@ -25,25 +25,18 @@ public class Aluguel
 
     public Aluguel() { }
 
-    public Aluguel(Imovel imovel, Inquilino inquilino, DateTime dataInicio, DateTime dataFim, decimal valor)
+    public Aluguel(Imovel imovel, Inquilino inquilino, DateTime dataInicio, DateTime dataFim)
     {
         Imovel = imovel;
         Inquilino = inquilino;
         DataInicio = dataInicio;
         DataFim = dataFim;
-        Valor = valor;
+        Valor = Imovel.CalcularAluguel((int)(dataFim - dataInicio).TotalDays / 365);
         Imovel.SetAlugado(true);
     }
-
-    public int GetId() => Id;
-    public Imovel GetImovel() => Imovel;
     public void SetImovel(Imovel imovel) => Imovel = imovel;
-    public Inquilino GetInquilino() => Inquilino;
     public void SetInquilino(Inquilino inquilino) => Inquilino = inquilino;
-    public DateTime GetDataInicio() => DataInicio;
     public void SetDataInicio(DateTime dataInicio) => DataInicio = dataInicio;
-    public DateTime GetDataFim() => DataFim;
     public void SetDataFim(DateTime dataFim) => DataFim = dataFim;
-    public decimal GetValor() => Valor;
     public void SetValor(decimal valor) => Valor = valor;
 }

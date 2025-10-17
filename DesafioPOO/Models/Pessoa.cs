@@ -27,11 +27,8 @@ public abstract class Pessoa
         Cpf = cpf;
     }
 
-    public string GetNome() => Nome;
     public void SetNome(string nome) => Nome = nome;
-    public string GetTelefone() => Telefone;
     public void SetTelefone(string telefone) => Telefone = telefone;
-    public string GetCpf() => Cpf;
     public void SetCpf(string cpf) => Cpf = cpf;
 
 }

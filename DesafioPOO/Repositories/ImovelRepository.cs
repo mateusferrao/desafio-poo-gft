@@ -37,6 +37,15 @@ public class ImovelRepository
             .ToListAsync();
     }
 
+    public async Task<List<Imovel>> GetImoveisAlugadosAsync()
+    {
+        return await _context.Imoveis
+            .Include(i => i.Endereco)
+            .Include(i => i.Proprietario)
+            .Where(i => i.Alugado == true)
+            .ToListAsync();
+    }
+
     public async Task<Imovel?> GetByIdAsync(int id)
     {
         return await _context.Imoveis

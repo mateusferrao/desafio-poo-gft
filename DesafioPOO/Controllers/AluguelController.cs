@@ -49,7 +49,6 @@ public class AluguelController(AluguelService aluguelService, CorretoraContext c
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] AluguelCreateDto aluguelDto)
     {
-        // Buscar imóvel e inquilino
         var imovel = await _context.Imoveis.FindAsync(aluguelDto.ImovelId);
         var inquilino = await _context.Pessoas.OfType<Inquilino>().FirstOrDefaultAsync(p => p.Id == aluguelDto.InquilinoId);
 
@@ -62,8 +61,7 @@ public class AluguelController(AluguelService aluguelService, CorretoraContext c
             imovel,
             inquilino,
             aluguelDto.DataInicio,
-            aluguelDto.DataFim,
-            aluguelDto.Valor
+            aluguelDto.DataFim
         );
 
         var aluguelCriado = await _aluguelService.AdicionarAluguelAsync(aluguel);

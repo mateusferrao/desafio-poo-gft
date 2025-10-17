@@ -2,7 +2,7 @@ namespace DesafioPOO.Models;
 
 public class Casa : Imovel
 {
-    private static readonly double PORCENTAGEM_DE_ALUGUEL = 0.01;
+    private static readonly decimal PORCENTAGEM_DE_ALUGUEL = 0.01m;
     
     public int NumeroQuartos { get; private set; }
     public int NumeroBanheiros { get; private set; }
@@ -10,9 +10,9 @@ public class Casa : Imovel
 
     public Casa() { }
 
-    public Casa(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho, 
+    public Casa(Endereco endereco, bool alugado, Proprietario proprietario, decimal valor, 
                 int numeroQuartos, int numeroBanheiros, bool temGaragem) 
-        : base(endereco, alugado, proprietario, tamanho)
+        : base(endereco, alugado, proprietario, valor)
     {
         NumeroQuartos = numeroQuartos;
         NumeroBanheiros = numeroBanheiros;
@@ -24,9 +24,19 @@ public class Casa : Imovel
         return Alugado ? "A casa está alugada" : "A casa está disponível";
     }
 
-    public override double CalcularAluguel()
+    public override decimal CalcularAluguel(int prazoAnos)
     {
-        return Tamanho * PORCENTAGEM_DE_ALUGUEL;
+        return Valor * PORCENTAGEM_DE_ALUGUEL * (1 - CalcularDescontoAluguel(prazoAnos));
+    }
+
+    public override decimal CalcularDescontoAluguel(int prazoAnos)
+    {
+        decimal percentualDesconto = base.CalcularDescontoAluguel(prazoAnos);
+        if (NumeroQuartos >= 5)
+        {
+            percentualDesconto += 0.03m;
+        }
+        return percentualDesconto;
     }
 
     public void SetNumeroQuartos(int numeroQuartos) => NumeroQuartos = numeroQuartos;

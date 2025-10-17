@@ -35,6 +35,13 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
         return Ok(apartamentos);
     }
 
+    [HttpGet("alugados")]
+    public async Task<IActionResult> GetAllAlugados()
+    {
+        var alugados = await _imovelService.BuscarImoveisAlugadosAsync();
+        return Ok(alugados);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -49,7 +56,6 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
     [HttpPost("casa")]
     public async Task<IActionResult> AddCasa([FromBody] CasaCreateDto casaDto)
     {
-        // Buscar endereço e proprietário
         var endereco = await _context.Enderecos.FindAsync(casaDto.EnderecoId);
         var proprietario = await _context.Pessoas.OfType<Proprietario>().FirstOrDefaultAsync(p => p.Id == casaDto.ProprietarioId);
 
@@ -62,7 +68,7 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
             endereco,
             casaDto.Alugado,
             proprietario,
-            casaDto.Tamanho,
+            casaDto.Valor,
             casaDto.NumeroQuartos,
             casaDto.NumeroBanheiros,
             casaDto.TemGaragem
@@ -75,7 +81,6 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
     [HttpPost("apartamento")]
     public async Task<IActionResult> AddApartamento([FromBody] ApartamentoCreateDto apartamentoDto)
     {
-        // Buscar endereço e proprietário
         var endereco = await _context.Enderecos.FindAsync(apartamentoDto.EnderecoId);
         var proprietario = await _context.Pessoas.OfType<Proprietario>().FirstOrDefaultAsync(p => p.Id == apartamentoDto.ProprietarioId);
 
@@ -88,7 +93,7 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
             endereco,
             apartamentoDto.Alugado,
             proprietario,
-            apartamentoDto.Tamanho,
+            apartamentoDto.Valor,
             apartamentoDto.Andar,
             apartamentoDto.NumeroApartamento
         );
@@ -106,7 +111,6 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
             return NotFound();
         }
 
-        // Buscar endereço e proprietário
         var endereco = await _context.Enderecos.FindAsync(imovelDto.EnderecoId);
         var proprietario = await _context.Pessoas.OfType<Proprietario>().FirstOrDefaultAsync(p => p.Id == imovelDto.ProprietarioId);
 
@@ -118,7 +122,7 @@ public class ImovelController(ImovelService imovelService, CorretoraContext cont
         imovelExistente.SetEndereco(endereco);
         imovelExistente.SetAlugado(imovelDto.Alugado);
         imovelExistente.SetProprietario(proprietario);
-        imovelExistente.SetTamanho(imovelDto.Tamanho);
+        imovelExistente.SetValor(imovelDto.Valor);
 
         var imovelAtualizado = await _imovelService.AtualizarImovelAsync(imovelExistente);
         return Ok(imovelAtualizado);

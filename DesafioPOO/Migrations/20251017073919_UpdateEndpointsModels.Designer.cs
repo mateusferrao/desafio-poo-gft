@@ -3,6 +3,7 @@ using System;
 using DesafioPOO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioPOO.Migrations
 {
     [DbContext(typeof(CorretoraContext))]
-    partial class CorretoraContextModelSnapshot : ModelSnapshot
+    [Migration("20251017073919_UpdateEndpointsModels")]
+    partial class UpdateEndpointsModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

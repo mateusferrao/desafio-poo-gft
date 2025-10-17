@@ -17,20 +17,18 @@ public abstract class Imovel
     public Proprietario Proprietario { get; private set; }
     
     [Required]
-    public Double Tamanho { get; private set; }
+    public decimal Valor { get; private set; }
 
     protected Imovel() { }
 
-    protected Imovel(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho)
+    protected Imovel(Endereco endereco, bool alugado, Proprietario proprietario, decimal valor)
     {
         Endereco = endereco;
         Alugado = alugado;
         Proprietario = proprietario;
-        Tamanho = tamanho;
+        Valor = valor;
     }
 
-    public int GetId() => Id;
-    public bool GetAlugado() => Alugado;
     public void SetAlugado(bool alugado)
     {
         if (alugado && Alugado)
@@ -39,15 +37,12 @@ public abstract class Imovel
         }
         Alugado = alugado;
     }
-    public Endereco GetEndereco() => Endereco;
     public void SetEndereco(Endereco endereco) => Endereco = endereco;
-    public Proprietario GetProprietario() => Proprietario;
     public void SetProprietario(Proprietario proprietario) => Proprietario = proprietario;
-    public Double GetTamanho() => Tamanho;
-    public void SetTamanho(Double tamanho) => Tamanho = tamanho;
+    public void SetValor(decimal valor) => Valor = valor;
     public string ContatoProprietario()
     {
-        return $"Nome: {Proprietario.GetNome()}, Telefone: {Proprietario.GetTelefone()}, Cpf: {Proprietario.GetCpf()}";
+        return $"Nome: {Proprietario.Nome}, Telefone: {Proprietario.Telefone}, Cpf: {Proprietario.Cpf}";
     }
 
     public virtual string EstaAlugado()
@@ -55,6 +50,13 @@ public abstract class Imovel
         return Alugado ? "O imóvel está alugado" : "O imóvel está disponível";
     }
 
-    public abstract Double CalcularAluguel();
-
+    public abstract decimal CalcularAluguel(int prazoAnos);
+    public virtual decimal CalcularDescontoAluguel(int prazoAnos)
+    {
+        if (prazoAnos >= 3)
+        {
+            return 0.05m;
+        }
+        return 0m;
+    }
 }
