@@ -47,11 +47,6 @@ public class PessoaController(PessoaService pessoaService) : ControllerBase
     [HttpPost("inquilino")]
     public async Task<IActionResult> AddInquilino([FromBody] InquilinoCreateDto inquilinoDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         var inquilino = new Inquilino(inquilinoDto.Nome, inquilinoDto.Telefone, inquilinoDto.Cpf);
         var inquilinoCriado = await _pessoaService.AdicionarPessoaAsync(inquilino);
         return CreatedAtAction(nameof(GetById), new { id = inquilinoCriado.Id }, inquilinoCriado);
@@ -60,11 +55,6 @@ public class PessoaController(PessoaService pessoaService) : ControllerBase
     [HttpPost("proprietario")]
     public async Task<IActionResult> AddProprietario([FromBody] ProprietarioCreateDto proprietarioDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         var proprietario = new Proprietario(proprietarioDto.Nome, proprietarioDto.Telefone, proprietarioDto.Cpf);
         var proprietarioCriado = await _pessoaService.AdicionarPessoaAsync(proprietario);
         return CreatedAtAction(nameof(GetById), new { id = proprietarioCriado.Id }, proprietarioCriado);
@@ -73,24 +63,12 @@ public class PessoaController(PessoaService pessoaService) : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] PessoaUpdateDto pessoaDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        if (id != pessoaDto.Id)
-        {
-            return BadRequest("ID da URL não confere com o ID do objeto");
-        }
-
-        // Buscar pessoa existente
-        var pessoaExistente = await _pessoaService.BuscarPessoaPorIdAsync(id);
+        var pessoaExistente = await _pessoaService.BuscarPessoaPorIdAsync(pessoaDto.Id);
         if (pessoaExistente == null)
         {
             return NotFound();
         }
 
-        // Atualizar propriedades
         pessoaExistente.SetNome(pessoaDto.Nome);
         pessoaExistente.SetTelefone(pessoaDto.Telefone);
         pessoaExistente.SetCpf(pessoaDto.Cpf);
@@ -102,13 +80,12 @@ public class PessoaController(PessoaService pessoaService) : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var pessoa = await _pessoaService.BuscarPessoaPorIdAsync(id);
+        var pessoa = await _pessoaService.DeletarPessoaAsync(id);
         if (pessoa == null)
         {
             return NotFound();
         }
-
-        await _pessoaService.DeletarPessoaAsync(id);
-        return NoContent();
+;
+        return Ok("Pessoa deletada com sucesso");
     }
 }

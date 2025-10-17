@@ -7,10 +7,8 @@ public class Apartamento : Imovel
     public int Andar { get; private set; }
     public string NumeroApartamento { get; private set; }
 
-    // Construtor sem parâmetros (necessário para o EF)
     public Apartamento() { }
 
-    // Construtor com parâmetros (para uso no código)
     public Apartamento(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho, 
                        int andar, string numeroApartamento) 
         : base(endereco, alugado, proprietario, tamanho)

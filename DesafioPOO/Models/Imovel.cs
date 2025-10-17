@@ -19,10 +19,8 @@ public abstract class Imovel
     [Required]
     public Double Tamanho { get; private set; }
 
-    // Construtor sem parâmetros (necessário para o EF)
     protected Imovel() { }
 
-    // Construtor com parâmetros (para uso no código)
     protected Imovel(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho)
     {
         Endereco = endereco;

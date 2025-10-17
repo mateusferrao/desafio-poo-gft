@@ -16,19 +16,16 @@ namespace DesafioPOO.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configurar herança para Pessoa
             modelBuilder.Entity<Pessoa>()
                 .HasDiscriminator<string>("Discriminator")
                 .HasValue<Proprietario>("Proprietario")
                 .HasValue<Inquilino>("Inquilino");
 
-            // Configurar herança para Imovel
             modelBuilder.Entity<Imovel>()
                 .HasDiscriminator<string>("Tipo")
                 .HasValue<Casa>("Casa")
                 .HasValue<Apartamento>("Apartamento");
 
-            // Configurar relacionamentos
             modelBuilder.Entity<Aluguel>()
                 .HasOne(a => a.Imovel)
                 .WithMany()

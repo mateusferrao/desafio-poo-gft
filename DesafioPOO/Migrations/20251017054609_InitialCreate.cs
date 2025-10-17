@@ -35,15 +35,16 @@ namespace DesafioPOO.Migrations
                 name: "Pessoas",
                 columns: table => new
                 {
-                    Cpf = table.Column<string>(type: "text", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "text", nullable: false),
                     Telefone = table.Column<string>(type: "text", nullable: false),
+                    Cpf = table.Column<string>(type: "text", nullable: false),
                     Discriminator = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pessoas", x => x.Cpf);
+                    table.PrimaryKey("PK_Pessoas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,10 +55,8 @@ namespace DesafioPOO.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EnderecoId = table.Column<int>(type: "integer", nullable: false),
                     Alugado = table.Column<bool>(type: "boolean", nullable: false),
-                    ProprietarioId = table.Column<string>(type: "text", nullable: true),
+                    ProprietarioId = table.Column<int>(type: "integer", nullable: false),
                     Tamanho = table.Column<double>(type: "double precision", nullable: false),
-                    InquilinoCpf = table.Column<string>(type: "text", nullable: true),
-                    ProprietarioCpf = table.Column<string>(type: "text", nullable: true),
                     Tipo = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
                     Andar = table.Column<int>(type: "integer", nullable: true),
                     NumeroApartamento = table.Column<string>(type: "text", nullable: true),
@@ -75,20 +74,10 @@ namespace DesafioPOO.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Imoveis_Pessoas_InquilinoCpf",
-                        column: x => x.InquilinoCpf,
-                        principalTable: "Pessoas",
-                        principalColumn: "Cpf");
-                    table.ForeignKey(
-                        name: "FK_Imoveis_Pessoas_ProprietarioCpf",
-                        column: x => x.ProprietarioCpf,
-                        principalTable: "Pessoas",
-                        principalColumn: "Cpf");
-                    table.ForeignKey(
                         name: "FK_Imoveis_Pessoas_ProprietarioId",
                         column: x => x.ProprietarioId,
                         principalTable: "Pessoas",
-                        principalColumn: "Cpf",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -99,7 +88,7 @@ namespace DesafioPOO.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ImovelId = table.Column<int>(type: "integer", nullable: false),
-                    InquilinoId = table.Column<string>(type: "text", nullable: true),
+                    InquilinoId = table.Column<int>(type: "integer", nullable: false),
                     DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DataFim = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Valor = table.Column<decimal>(type: "numeric", nullable: false)
@@ -117,7 +106,7 @@ namespace DesafioPOO.Migrations
                         name: "FK_Alugueis_Pessoas_InquilinoId",
                         column: x => x.InquilinoId,
                         principalTable: "Pessoas",
-                        principalColumn: "Cpf",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -135,16 +124,6 @@ namespace DesafioPOO.Migrations
                 name: "IX_Imoveis_EnderecoId",
                 table: "Imoveis",
                 column: "EnderecoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Imoveis_InquilinoCpf",
-                table: "Imoveis",
-                column: "InquilinoCpf");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Imoveis_ProprietarioCpf",
-                table: "Imoveis",
-                column: "ProprietarioCpf");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Imoveis_ProprietarioId",

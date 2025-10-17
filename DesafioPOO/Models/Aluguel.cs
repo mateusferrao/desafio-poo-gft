@@ -23,10 +23,8 @@ public class Aluguel
     [Range(0, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
     public decimal Valor { get; private set; }
 
-    // Construtor sem parâmetros (necessário para o EF)
     public Aluguel() { }
 
-    // Construtor com parâmetros (para uso no código)
     public Aluguel(Imovel imovel, Inquilino inquilino, DateTime dataInicio, DateTime dataFim, decimal valor)
     {
         Imovel = imovel;

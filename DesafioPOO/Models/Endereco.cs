@@ -26,10 +26,8 @@ public class Endereco
     [Required]
     public string Cep { get; private set; }
 
-    // Construtor sem parâmetros (necessário para o EF)
     public Endereco() { }
 
-    // Construtor com parâmetros (para uso no código)
     public Endereco(string rua, int numero, string bairro, string complemento, string cidade, string estado, string cep)
     {
         Rua = rua;

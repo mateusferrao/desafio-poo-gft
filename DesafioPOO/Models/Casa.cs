@@ -8,10 +8,8 @@ public class Casa : Imovel
     public int NumeroBanheiros { get; private set; }
     public bool TemGaragem { get; private set; }
 
-    // Construtor sem parâmetros (necessário para o EF)
     public Casa() { }
 
-    // Construtor com parâmetros (para uso no código)
     public Casa(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho, 
                 int numeroQuartos, int numeroBanheiros, bool temGaragem) 
         : base(endereco, alugado, proprietario, tamanho)

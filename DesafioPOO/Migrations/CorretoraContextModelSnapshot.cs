@@ -39,8 +39,8 @@ namespace DesafioPOO.Migrations
                     b.Property<int>("ImovelId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("InquilinoId")
-                        .HasColumnType("text");
+                    b.Property<int>("InquilinoId")
+                        .HasColumnType("integer");
 
                     b.Property<decimal>("Valor")
                         .HasColumnType("numeric");
@@ -108,14 +108,8 @@ namespace DesafioPOO.Migrations
                     b.Property<int>("EnderecoId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("InquilinoCpf")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProprietarioCpf")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProprietarioId")
-                        .HasColumnType("text");
+                    b.Property<int>("ProprietarioId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("Tamanho")
                         .HasColumnType("double precision");
@@ -129,10 +123,6 @@ namespace DesafioPOO.Migrations
 
                     b.HasIndex("EnderecoId");
 
-                    b.HasIndex("InquilinoCpf");
-
-                    b.HasIndex("ProprietarioCpf");
-
                     b.HasIndex("ProprietarioId");
 
                     b.ToTable("Imoveis");
@@ -144,17 +134,20 @@ namespace DesafioPOO.Migrations
 
             modelBuilder.Entity("DesafioPOO.Models.Pessoa", b =>
                 {
-                    b.Property<string>("Cpf")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("character varying(13)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -164,7 +157,7 @@ namespace DesafioPOO.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Cpf");
+                    b.HasKey("Id");
 
                     b.ToTable("Pessoas");
 
@@ -244,14 +237,6 @@ namespace DesafioPOO.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DesafioPOO.Models.Inquilino", null)
-                        .WithMany("Imoveis")
-                        .HasForeignKey("InquilinoCpf");
-
-                    b.HasOne("DesafioPOO.Models.Proprietario", null)
-                        .WithMany("Imoveis")
-                        .HasForeignKey("ProprietarioCpf");
-
                     b.HasOne("DesafioPOO.Models.Proprietario", "Proprietario")
                         .WithMany()
                         .HasForeignKey("ProprietarioId")
@@ -261,16 +246,6 @@ namespace DesafioPOO.Migrations
                     b.Navigation("Endereco");
 
                     b.Navigation("Proprietario");
-                });
-
-            modelBuilder.Entity("DesafioPOO.Models.Inquilino", b =>
-                {
-                    b.Navigation("Imoveis");
-                });
-
-            modelBuilder.Entity("DesafioPOO.Models.Proprietario", b =>
-                {
-                    b.Navigation("Imoveis");
                 });
 #pragma warning restore 612, 618
         }
