@@ -1,34 +1,34 @@
-using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using DesafioPOO.Data;
+// using DesafioPOO.Repositories;
+// using DesafioPOO.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// PostgreSQL connection
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<CorretoraContext>(options =>
+    options.UseNpgsql(connectionString));
+
+// Services & Repositories
+// builder.Services.AddScoped<PropertyRepository>();
+// builder.Services.AddScoped<PropertyService>();
+
+// Controllers & Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Desafio POO API",
-        Version = "v1",
-        Description = "API para o Desafio de Programação Orientada a Objetos do Programa GFT Start"
-    });
-});
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Desafio POO API v1");
-        c.RoutePrefix = string.Empty;
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

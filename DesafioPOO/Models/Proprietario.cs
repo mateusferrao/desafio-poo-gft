@@ -1,44 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace DesafioPOO.Models;
 
-public class Proprietario
+public class Proprietario : Pessoa
 {
-    public int Id { get; set; }
-    
-    [Required]
-    [MaxLength(100)]
-    public string Nome { get; set; } = string.Empty;
-    
-    [Required]
-    [MaxLength(100)]
-    public string Email { get; set; } = string.Empty;
-    
-    [Required]
-    [MaxLength(20)]
-    public string Telefone { get; set; } = string.Empty;
-
-    public Proprietario() { }
-
-    public Proprietario(string nome, string email, string telefone)
+    public Proprietario(string nome, string telefone, string cpf, List<Imovel> imoveis)
     {
         Nome = nome;
-        Email = email;
         Telefone = telefone;
+        Cpf = cpf;
+        Imoveis = imoveis;
     }
 
-    public string GetNome()
-    {
-        return Nome;
-    }
-
-    public string GetEmail()
-    {
-        return Email;
-    }
-
-    public string GetTelefone()
-    {
-        return Telefone;
-    }
 }

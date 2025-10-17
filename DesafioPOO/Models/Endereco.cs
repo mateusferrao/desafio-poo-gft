@@ -1,35 +1,28 @@
-using System.ComponentModel.DataAnnotations;
+namespace DesafioPOO.Models;
 
-namespace DesafioPOO.Models
+public class Endereco(string rua, int numero, string bairro, string complemento, string cidade, string estado, string cep)
 {
-    public class Endereco
-    {
-        public int Id { get; set; }
-        
-        [Required]
-        [MaxLength(200)]
-        public string Rua { get; set; } = string.Empty;
-        
-        [Required]
-        [MaxLength(100)]
-        public string Cidade { get; set; } = string.Empty;
-        
-        [Required]
-        [MaxLength(50)]
-        public string Estado { get; set; } = string.Empty;
-        
-        [Required]
-        [MaxLength(50)]
-        public string Pais { get; set; } = string.Empty;
+    private string Rua { get; set; } = rua;
+    private int Numero { get; set; } = numero;
+    private string Bairro { get; set; } = bairro;
+    private string Complemento { get; set; } = complemento;
+    private string Cidade { get; set; } = cidade;
+    private string Estado { get; set; } = estado;
+    private string Cep { get; set; } = cep;
 
-        public Endereco() { }
+    public string GetRua() => Rua;
+    public void SetRua(string rua) => Rua = rua;
+    public int GetNumero() => Numero;
+    public void SetNumero(int numero) => Numero = numero;
+    public string GetBairro() => Bairro;
+    public void SetBairro(string bairro) => Bairro = bairro;
+    public string GetComplemento() => Complemento;
+    public void SetComplemento(string complemento) => Complemento = complemento;
+    public string GetCidade() => Cidade;
+    public void SetCidade(string cidade) => Cidade = cidade;
+    public string GetEstado() => Estado;
+    public void SetEstado(string estado) => Estado = estado;
+    public string GetCep() => Cep;
+    public void SetCep(string cep) => Cep = cep;
 
-        public Endereco(string rua, string cidade, string estado, string pais)
-        {
-            Rua = rua;
-            Cidade = cidade;
-            Estado = estado;
-            Pais = pais;
-        }
-    }
 }

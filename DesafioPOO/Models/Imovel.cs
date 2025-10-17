@@ -1,49 +1,35 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace DesafioPOO.Models;
 
 public abstract class Imovel
 {
-    public int Id { get; set; }
-    
-    [Required]
-    public int Numero { get; set; }
-    
-    [Required]
-    public bool Alugado { get; set; }
-    
-    [Required]
-    public int ProprietarioId { get; set; }
-    public Proprietario Proprietario { get; set; } = null!;
-    
-    [Required]
-    public int EnderecoId { get; set; }
-    public Endereco Endereco { get; set; } = null!;
+    protected Endereco Endereco { get; set; }
+    protected bool Alugado { get; set; }
+    protected Proprietario Proprietario { get; set; }
 
-    public virtual bool EstaAlugado()
+    public bool GetAlugado() => Alugado;
+    public void SetAlugado(bool alugado)
     {
-        return Alugado;
+        if (alugado && Alugado)
+        {
+            throw new Exception("O imóvel já está alugado");
+        }
+        Alugado = alugado;
     }
+    public Endereco GetEndereco() => Endereco;
+    public void SetEndereco(Endereco endereco) => Endereco = endereco;
+    public Proprietario GetProprietario() => Proprietario;
+    public void SetProprietario(Proprietario proprietario) => Proprietario = proprietario;
 
     public string ContatoProprietario()
     {
-        return $"Nome: {Proprietario.GetNome()}, Email: {Proprietario.GetEmail()}, Telefone: {Proprietario.GetTelefone()}";
+        return $"Nome: {Proprietario.GetNome()}, Telefone: {Proprietario.GetTelefone()}, Cpf: {Proprietario.GetCpf()}";
     }
-}
 
-public class Casa : Imovel
-{
-    public int NumeroQuartos { get; set; }
-    public int NumeroBanheiros { get; set; }
-    public bool TemGaragem { get; set; }
-    public double AreaTerreno { get; set; }
-}
+    public virtual string EstaAlugado()
+    {
+        return Alugado ? "O imóvel está alugado" : "O imóvel está disponível";
+    }
 
-public class Apartamento : Imovel
-{
-    public int NumeroQuartos { get; set; }
-    public int NumeroBanheiros { get; set; }
-    public int NumeroVagasGaragem { get; set; }
-    public int Andar { get; set; }
-    public double AreaUtil { get; set; }
+    // public abstract int CalcularAluguel();
+
 }
