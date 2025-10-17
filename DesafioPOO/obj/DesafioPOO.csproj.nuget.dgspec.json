@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\GFT\\Programa Start\\Desafio POO\\desafio-poo\\DesafioPOO\\DesafioPOO.csproj": {}
+    "C:\\Users\\muft\\OneDrive - GFT Technologies SE\\Desktop\\GFT\\Programa Start\\Desafio POO\\desafio-poo-gft\\DesafioPOO\\DesafioPOO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\GFT\\Programa Start\\Desafio POO\\desafio-poo\\DesafioPOO\\DesafioPOO.csproj": {
+    "C:\\Users\\muft\\OneDrive - GFT Technologies SE\\Desktop\\GFT\\Programa Start\\Desafio POO\\desafio-poo-gft\\DesafioPOO\\DesafioPOO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\GFT\\Programa Start\\Desafio POO\\desafio-poo\\DesafioPOO\\DesafioPOO.csproj",
+        "projectUniqueName": "C:\\Users\\muft\\OneDrive - GFT Technologies SE\\Desktop\\GFT\\Programa Start\\Desafio POO\\desafio-poo-gft\\DesafioPOO\\DesafioPOO.csproj",
         "projectName": "DesafioPOO",
-        "projectPath": "C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\GFT\\Programa Start\\Desafio POO\\desafio-poo\\DesafioPOO\\DesafioPOO.csproj",
-        "packagesPath": "C:\\Users\\mateu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mateu\\OneDrive\\Área de Trabalho\\GFT\\Programa Start\\Desafio POO\\desafio-poo\\DesafioPOO\\obj\\",
+        "projectPath": "C:\\Users\\muft\\OneDrive - GFT Technologies SE\\Desktop\\GFT\\Programa Start\\Desafio POO\\desafio-poo-gft\\DesafioPOO\\DesafioPOO.csproj",
+        "packagesPath": "C:\\Users\\muft\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\muft\\OneDrive - GFT Technologies SE\\Desktop\\GFT\\Programa Start\\Desafio POO\\desafio-poo-gft\\DesafioPOO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mateu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\muft\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -85,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
