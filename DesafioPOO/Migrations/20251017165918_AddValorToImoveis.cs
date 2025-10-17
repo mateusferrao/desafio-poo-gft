@@ -5,7 +5,7 @@
 namespace DesafioPOO.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateEndpointsModels : Migration
+    public partial class AddValorToImoveis : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

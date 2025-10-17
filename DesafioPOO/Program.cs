@@ -29,16 +29,33 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
     try
     {
         var context = services.GetRequiredService<CorretoraContext>();
-        context.Database.Migrate();
-        Console.WriteLine("Database migrations applied successfully.");
+
+        const int maxRetries = 10;
+        var delayBaseMs = 1000;
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                context.Database.Migrate();
+                logger.LogInformation("Database migrations applied successfully.");
+                break;
+            }
+            catch (Exception ex) when (attempt < maxRetries)
+            {
+                var delay = TimeSpan.FromMilliseconds(delayBaseMs * attempt);
+                logger.LogWarning(ex, "Migration attempt {Attempt}/{MaxRetries} failed. Retrying in {Delay}...", attempt, maxRetries, delay);
+                Thread.Sleep(delay);
+            }
+        }
     }
     catch (Exception ex)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred while migrating the database.");
+        throw;
     }
 }
 

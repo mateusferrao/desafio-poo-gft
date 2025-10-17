@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DesafioPOO.Migrations
 {
     [DbContext(typeof(CorretoraContext))]
-    [Migration("20251017073919_UpdateEndpointsModels")]
-    partial class UpdateEndpointsModels
+    [Migration("20251017165918_AddValorToImoveis")]
+    partial class AddValorToImoveis
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
