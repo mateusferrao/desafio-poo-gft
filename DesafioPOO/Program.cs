@@ -13,6 +13,12 @@ builder.Services.AddDbContext<CorretoraContext>(options =>
 
 builder.Services.AddScoped<PessoaRepository>();
 builder.Services.AddScoped<PessoaService>();
+builder.Services.AddScoped<EnderecoRepository>();
+builder.Services.AddScoped<EnderecoService>();
+builder.Services.AddScoped<ImovelRepository>();
+builder.Services.AddScoped<ImovelService>();
+builder.Services.AddScoped<AluguelRepository>();
+builder.Services.AddScoped<AluguelService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

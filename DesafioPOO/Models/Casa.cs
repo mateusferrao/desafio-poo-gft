@@ -28,4 +28,8 @@ public class Casa : Imovel
     {
         return Tamanho * PORCENTAGEM_DE_ALUGUEL;
     }
+
+    public void SetNumeroQuartos(int numeroQuartos) => NumeroQuartos = numeroQuartos;
+    public void SetNumeroBanheiros(int numeroBanheiros) => NumeroBanheiros = numeroBanheiros;
+    public void SetTemGaragem(bool temGaragem) => TemGaragem = temGaragem;
 }

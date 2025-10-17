@@ -4,8 +4,6 @@ namespace DesafioPOO.DTOs;
 
 public class PessoaUpdateDto
 {
-    [Required(ErrorMessage = "ID é obrigatório")]
-    public int Id { get; set; }
     
     [Required(ErrorMessage = "Nome é obrigatório")]
     [StringLength(255, ErrorMessage = "Nome deve ter no máximo 255 caracteres")]

@@ -63,7 +63,7 @@ public class PessoaController(PessoaService pessoaService) : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] PessoaUpdateDto pessoaDto)
     {
-        var pessoaExistente = await _pessoaService.BuscarPessoaPorIdAsync(pessoaDto.Id);
+        var pessoaExistente = await _pessoaService.BuscarPessoaPorIdAsync(id);
         if (pessoaExistente == null)
         {
             return NotFound();
@@ -80,12 +80,12 @@ public class PessoaController(PessoaService pessoaService) : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var pessoa = await _pessoaService.DeletarPessoaAsync(id);
+        var pessoa = await _pessoaService.BuscarPessoaPorIdAsync(id);
         if (pessoa == null)
         {
             return NotFound();
         }
-;
-        return Ok("Pessoa deletada com sucesso");
+        await _pessoaService.DeletarPessoaAsync(id);
+        return NoContent();
     }
 }

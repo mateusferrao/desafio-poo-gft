@@ -26,4 +26,7 @@ public class Apartamento : Imovel
     {
         return Tamanho * PORCENTAGEM_DE_ALUGUEL;
     }
+
+    public void SetAndar(int andar) => Andar = andar;
+    public void SetNumeroApartamento(string numeroApartamento) => NumeroApartamento = numeroApartamento;
 }
