@@ -5,16 +5,40 @@ namespace DesafioPOO.Models;
 
 public abstract class Pessoa
 {
+    public int Id { get; private set; }
+    
     [Required]
-    protected string Nome { get; set; } = string.Empty;
+    public string Nome { get; private set; } = string.Empty;
+    
     [Required]
-    protected string Telefone { get; set; } = string.Empty;
+    public string Telefone { get; private set; } = string.Empty;
 
+    [Required]
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    protected string Cpf { get ; set; } = string.Empty;
-    protected List<Imovel> Imoveis { get; set; } = [];
+    public string Cpf { get; private set; } = string.Empty;
+    
+    public List<Imovel> Imoveis { get; private set; } = [];
 
+    // Construtor sem parâmetros (necessário para o EF)
+    protected Pessoa() { }
+
+    // Construtor com parâmetros (para uso no código)
+    protected Pessoa(string nome, string telefone, string cpf)
+    {
+        Nome = nome;
+        Telefone = telefone;
+        Cpf = cpf;
+    }
+
+    // Construtor com parâmetros incluindo imóveis
+    protected Pessoa(string nome, string telefone, string cpf, List<Imovel> imoveis)
+    {
+        Nome = nome;
+        Telefone = telefone;
+        Cpf = cpf;
+        Imoveis = imoveis;
+    }
 
     public string GetNome() => Nome;
     public void SetNome(string nome) => Nome = nome;

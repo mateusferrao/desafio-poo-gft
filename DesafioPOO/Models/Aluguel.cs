@@ -5,21 +5,28 @@ namespace DesafioPOO.Models;
 
 public class Aluguel
 {
-    private int Id { get; set; }
+    public int Id { get; private set; }
+    
     [Required]
-    [ForeignKey("Imovel")]
-    private Imovel Imovel { get; set; }
+    public Imovel Imovel { get; private set; }
+    
     [Required]
-    [ForeignKey("Inquilino")]
-    private Inquilino Inquilino { get; set; }
+    public Inquilino Inquilino { get; private set; }
+    
     [Required]
-    private DateTime DataInicio { get; set; }
+    public DateTime DataInicio { get; private set; }
+    
     [Required]
-    private DateTime DataFim { get; set; }
+    public DateTime DataFim { get; private set; }
+    
     [Required]
-    [MinLength(0)]
-    private decimal Valor { get; set; }
+    [Range(0, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero")]
+    public decimal Valor { get; private set; }
 
+    // Construtor sem parâmetros (necessário para o EF)
+    public Aluguel() { }
+
+    // Construtor com parâmetros (para uso no código)
     public Aluguel(Imovel imovel, Inquilino inquilino, DateTime dataInicio, DateTime dataFim, decimal valor)
     {
         Imovel = imovel;

@@ -2,19 +2,18 @@ namespace DesafioPOO.Models;
 
 public class Inquilino : Pessoa
 {
-    public Inquilino(string nome, string telefone, string cpf)
+    // Construtor sem parâmetros (necessário para o EF)
+    public Inquilino() { }
+
+    // Construtor com parâmetros (para uso no código)
+    public Inquilino(string nome, string telefone, string cpf) 
+        : base(nome, telefone, cpf)
     {
-        Nome = nome;
-        Telefone = telefone;
-        Cpf = cpf;
     }
 
-    public Inquilino(string nome, string telefone, string cpf, List<Imovel> imoveis)
+    // Construtor com parâmetros incluindo imóveis
+    public Inquilino(string nome, string telefone, string cpf, List<Imovel> imoveis) 
+        : base(nome, telefone, cpf, imoveis)
     {
-        Nome = nome;
-        Telefone = telefone;
-        Cpf = cpf;
-        Imoveis = imoveis;
     }
-
 }

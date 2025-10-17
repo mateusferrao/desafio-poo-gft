@@ -3,19 +3,33 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DesafioPOO.Models;
 
-public abstract class Imovel(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho)
+public abstract class Imovel
 {
-    private int Id { get; set; }
+    public int Id { get; private set; }
+    
     [Required]
-    [ForeignKey("Endereco")]
-    protected Endereco Endereco { get; set; } = endereco;
+    public Endereco Endereco { get; private set; }
+    
     [Required]
-    protected bool Alugado { get; set; } = alugado;
+    public bool Alugado { get; private set; }
+    
     [Required]
-    [ForeignKey("Proprietario")]
-    protected Proprietario Proprietario { get; set; } = proprietario;
+    public Proprietario Proprietario { get; private set; }
+    
     [Required]
-    protected Double Tamanho { get; set; } = tamanho;
+    public Double Tamanho { get; private set; }
+
+    // Construtor sem parâmetros (necessário para o EF)
+    protected Imovel() { }
+
+    // Construtor com parâmetros (para uso no código)
+    protected Imovel(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho)
+    {
+        Endereco = endereco;
+        Alugado = alugado;
+        Proprietario = proprietario;
+        Tamanho = tamanho;
+    }
 
     public int GetId() => Id;
     public bool GetAlugado() => Alugado;

@@ -2,17 +2,44 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DesafioPOO.Models;
 
-public class Endereco(string rua, int numero, string bairro, string complemento, string cidade, string estado, string cep)
+public class Endereco
 {
-    private int Id { get; set; }
-    private string Rua { get; set; } = rua;
-    private int Numero { get; set; } = numero;
-    private string Bairro { get; set; } = bairro;
-    private string Complemento { get; set; } = complemento;
-    private string Cidade { get; set; } = cidade;
-    private string Estado { get; set; } = estado;
+    public int Id { get; private set; }
+    
     [Required]
-    private string Cep { get; set; } = cep;
+    public string Rua { get; private set; }
+    
+    [Required]
+    public int Numero { get; private set; }
+    
+    [Required]
+    public string Bairro { get; private set; }
+    
+    public string Complemento { get; private set; }
+    
+    [Required]
+    public string Cidade { get; private set; }
+    
+    [Required]
+    public string Estado { get; private set; }
+    
+    [Required]
+    public string Cep { get; private set; }
+
+    // Construtor sem parâmetros (necessário para o EF)
+    public Endereco() { }
+
+    // Construtor com parâmetros (para uso no código)
+    public Endereco(string rua, int numero, string bairro, string complemento, string cidade, string estado, string cep)
+    {
+        Rua = rua;
+        Numero = numero;
+        Bairro = bairro;
+        Complemento = complemento;
+        Cidade = cidade;
+        Estado = estado;
+        Cep = cep;
+    }
 
     public int GetId() => Id;
     public string GetRua() => Rua;
