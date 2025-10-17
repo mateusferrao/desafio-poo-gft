@@ -1,11 +1,19 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DesafioPOO.Models;
 
 public abstract class Pessoa
 {
-    protected string Nome { get; set; }
-    protected string Telefone { get; set; }
-    protected string Cpf { get ; set; }
-    protected List<Imovel> Imoveis { get; set; }
+    [Required]
+    protected string Nome { get; set; } = string.Empty;
+    [Required]
+    protected string Telefone { get; set; } = string.Empty;
+
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    protected string Cpf { get ; set; } = string.Empty;
+    protected List<Imovel> Imoveis { get; set; } = [];
 
 
     public string GetNome() => Nome;

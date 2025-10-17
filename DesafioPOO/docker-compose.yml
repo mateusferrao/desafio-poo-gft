@@ -1,15 +1,36 @@
 version: '3.9'
+
 services:
   db:
     image: postgres:15
+    container_name: postgres_corretora
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: sua_senha
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: corretora
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - corretora_network
+
+  api:
+    build: .
+    container_name: corretora_api
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=corretora;Username=postgres;Password=postgres"
+    networks:
+      - corretora_network
 
 volumes:
   db_data:
+
+networks:
+  corretora_network:
+    driver: bridge

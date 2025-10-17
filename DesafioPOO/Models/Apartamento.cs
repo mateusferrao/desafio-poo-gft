@@ -1,24 +1,15 @@
 namespace DesafioPOO.Models;
 
-public class Apartamento : Imovel
+public class Apartamento(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho) : Imovel(endereco, alugado, proprietario, tamanho)
 {
-    public Apartamento(Endereco endereco, bool alugado, Proprietario proprietario)
-    {
-        Endereco = endereco;
-        Alugado = alugado;
-        Proprietario = proprietario;
-    }
-
-    public Apartamento(Endereco endereco, bool alugado, Proprietario proprietario, Inquilino inquilino)
-    {
-        Endereco = endereco;
-        Alugado = alugado;
-        Proprietario = proprietario;
-        Inquilino = inquilino;
-    }
-
+    private static readonly double PORCENTAGEM_DE_ALUGUEL = 0.007;
     public override string EstaAlugado()
     {
         return Alugado ? "O apartamento está alugado" : "O apartamento está disponível";
+    }
+
+    public override double CalcularAluguel()
+    {
+        return Tamanho * PORCENTAGEM_DE_ALUGUEL;
     }
 }

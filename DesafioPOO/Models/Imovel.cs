@@ -1,11 +1,23 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DesafioPOO.Models;
 
-public abstract class Imovel
+public abstract class Imovel(Endereco endereco, bool alugado, Proprietario proprietario, double tamanho)
 {
-    protected Endereco Endereco { get; set; }
-    protected bool Alugado { get; set; }
-    protected Proprietario Proprietario { get; set; }
+    private int Id { get; set; }
+    [Required]
+    [ForeignKey("Endereco")]
+    protected Endereco Endereco { get; set; } = endereco;
+    [Required]
+    protected bool Alugado { get; set; } = alugado;
+    [Required]
+    [ForeignKey("Proprietario")]
+    protected Proprietario Proprietario { get; set; } = proprietario;
+    [Required]
+    protected Double Tamanho { get; set; } = tamanho;
 
+    public int GetId() => Id;
     public bool GetAlugado() => Alugado;
     public void SetAlugado(bool alugado)
     {
@@ -19,7 +31,8 @@ public abstract class Imovel
     public void SetEndereco(Endereco endereco) => Endereco = endereco;
     public Proprietario GetProprietario() => Proprietario;
     public void SetProprietario(Proprietario proprietario) => Proprietario = proprietario;
-
+    public Double GetTamanho() => Tamanho;
+    public void SetTamanho(Double tamanho) => Tamanho = tamanho;
     public string ContatoProprietario()
     {
         return $"Nome: {Proprietario.GetNome()}, Telefone: {Proprietario.GetTelefone()}, Cpf: {Proprietario.GetCpf()}";
@@ -30,6 +43,6 @@ public abstract class Imovel
         return Alugado ? "O imóvel está alugado" : "O imóvel está disponível";
     }
 
-    // public abstract int CalcularAluguel();
+    public abstract Double CalcularAluguel();
 
 }

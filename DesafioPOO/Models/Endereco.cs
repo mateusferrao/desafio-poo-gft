@@ -1,15 +1,20 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace DesafioPOO.Models;
 
 public class Endereco(string rua, int numero, string bairro, string complemento, string cidade, string estado, string cep)
 {
+    private int Id { get; set; }
     private string Rua { get; set; } = rua;
     private int Numero { get; set; } = numero;
     private string Bairro { get; set; } = bairro;
     private string Complemento { get; set; } = complemento;
     private string Cidade { get; set; } = cidade;
     private string Estado { get; set; } = estado;
+    [Required]
     private string Cep { get; set; } = cep;
 
+    public int GetId() => Id;
     public string GetRua() => Rua;
     public void SetRua(string rua) => Rua = rua;
     public int GetNumero() => Numero;

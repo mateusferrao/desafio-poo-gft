@@ -8,5 +8,6 @@ namespace DesafioPOO.Data
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Imovel> Imoveis { get; set; }
+        public DbSet<Aluguel> Alugueis { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using DesafioPOO.Data;
-// using DesafioPOO.Repositories;
-// using DesafioPOO.Services;
+using DesafioPOO.Repositories;
+using DesafioPOO.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +11,8 @@ builder.Services.AddDbContext<CorretoraContext>(options =>
     options.UseNpgsql(connectionString));
 
 // Services & Repositories
-// builder.Services.AddScoped<PropertyRepository>();
-// builder.Services.AddScoped<PropertyService>();
+builder.Services.AddScoped<PessoaRepository>();
+builder.Services.AddScoped<PessoaService>();
 
 // Controllers & Swagger
 builder.Services.AddControllers();
